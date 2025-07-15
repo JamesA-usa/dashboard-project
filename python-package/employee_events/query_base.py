@@ -3,11 +3,13 @@
 from sqlite3 import connect
 from pathlib import Path
 import pandas as pd
+from sql_execution import QueryMixin
 
 # Define a class called QueryBase
 # Use inheritance to add methods
 # for querying the employee_events database.
 # YOUR CODE HERE
+class QueryBase(QueryMixin):
 
     # Create a class attribute called `name`
     # set the attribute to an empty string
