@@ -1,5 +1,8 @@
 # Import any dependencies needed to execute sql queries
 # YOUR CODE HERE
+from sqlite3 import connect
+from pathlib import Path
+import pandas as pd
 
 # Define a class called QueryBase
 # Use inheritance to add methods
