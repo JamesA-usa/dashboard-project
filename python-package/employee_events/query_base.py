@@ -14,13 +14,16 @@ class QueryBase(QueryMixin):
     # Create a class attribute called `name`
     # set the attribute to an empty string
     # YOUR CODE HERE
+    name:str = ""
 
     # Define a `names` method that receives
     # no passed arguments
     # YOUR CODE HERE
+    def names(self):
         
         # Return an empty list
         # YOUR CODE HERE
+        return []
 
 
     # Define an `event_counts` method
