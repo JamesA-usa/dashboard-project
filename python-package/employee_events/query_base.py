@@ -14,7 +14,7 @@ class QueryBase(QueryMixin):
     # Create a class attribute called `name`
     # set the attribute to an empty string
     # YOUR CODE HERE
-    name:str = ""
+    name = ""
 
     # Define a `names` method that receives
     # no passed arguments
@@ -30,6 +30,7 @@ class QueryBase(QueryMixin):
     # that receives an `id` argument
     # This method should return a pandas dataframe
     # YOUR CODE HERE
+    def event_counts(self, id):
 
         # QUERY 1
         # Write an SQL query that groups by `event_date`
@@ -40,6 +41,28 @@ class QueryBase(QueryMixin):
         # of id columns used for joining
         # order by the event_date column
         # YOUR CODE HERE
+
+        query_string = f"""
+            select 
+                event_date, 
+                employee_events.{self.name}_id,
+                sum(positive_events) as positive_events, 
+                sum(negative_events) as negative_events
+            from 
+                {self.name} inner join employee_events
+            on 
+                employee_events.{self.name}_id = {self.name}.{self.name}_id
+            group by
+                event_date,
+                employee_events.{self.name}_id
+            order by 
+                event_date,
+                employee_events.{self.name}_id
+            having
+                employee_events.{self.name}_id = {id}
+            """
+        results = super().pandas_query(query_string)
+        return results
             
     
 
