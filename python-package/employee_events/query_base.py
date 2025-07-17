@@ -42,29 +42,29 @@ class QueryBase(QueryMixin):
         # order by the event_date column
         # YOUR CODE HERE
 
+        """ 
+        Ref (from questions posted in 'Knowledge' forum): 
+        `name`: Table name ("employee" or "team")
+        `id`: This id is the specific employee or team ID you want to filter the results for.
+        """
+
         query_string = f"""
             select 
-                event_date, 
-                employee_events.{self.name}_id,
                 sum(positive_events) as positive_events, 
                 sum(negative_events) as negative_events
             from 
                 {self.name} inner join employee_events
             on 
                 employee_events.{self.name}_id = {self.name}.{self.name}_id
+            where
+                {self.name}.{self.name}_id = {id}
             group by
-                event_date,
-                employee_events.{self.name}_id
+                event_date
             order by 
-                event_date,
-                employee_events.{self.name}_id
-            having
-                employee_events.{self.name}_id = {id}
+                event_date
             """
         results = super().pandas_query(query_string)
         return results
-            
-    
 
     # Define a `notes` method that receives an id argument
     # This function should return a pandas dataframe
