@@ -69,6 +69,7 @@ class QueryBase(QueryMixin):
     # Define a `notes` method that receives an id argument
     # This function should return a pandas dataframe
     # YOUR CODE HERE
+    def notes(self, id):
 
         # QUERY 2
         # Write an SQL query that returns `note_date`, and `note`
@@ -78,4 +79,14 @@ class QueryBase(QueryMixin):
         # so the query returns the notes
         # for the table name in the `name` class attribute
         # YOUR CODE HERE
-
+        query_string = f"""
+            select 
+                {self.name}_id, note_date, note
+            from
+                notes
+            where
+                {self.name}_id = {id}
+            """
+        results = super().pandas_query(query_string)
+        return results
+    
