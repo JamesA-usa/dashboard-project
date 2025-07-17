@@ -38,7 +38,7 @@ class Employee(QueryBase):
         #### YOUR CODE HERE
         query_string = f"""
             select 
-                first_name, last_name, employee_id
+                first_name, last_name, {self.name}_id
             from
                 {self.name}
             """
