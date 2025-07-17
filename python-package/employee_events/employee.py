@@ -69,6 +69,8 @@ class Employee(QueryBase):
             where
                 {self.name}.{self.name}_id = {id}
             """
+        results = super().query(query_string)
+        return results
 
 
     # Below is method with an SQL query
