@@ -65,7 +65,7 @@ class Employee(QueryBase):
             select
                 first_name, last_name
             from
-                employee
+                {self.name}
             where
                 {self.name}.{self.name}_id = {id}
             """
@@ -91,7 +91,7 @@ class Employee(QueryBase):
         #                 USING({self.name}_id)
         #             WHERE {self.name}.{self.name}_id = {id}
         #         """
-        query_string =  f"""
+        query_string = f"""
                     SELECT SUM(positive_events) positive_events
                          , SUM(negative_events) negative_events
                     FROM {self.name}
