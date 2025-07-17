@@ -81,7 +81,15 @@ class Employee(QueryBase):
     #### YOUR CODE HERE
     def model_data(self, id):
 
-        return f"""
+        # return f"""
+        #             SELECT SUM(positive_events) positive_events
+        #                  , SUM(negative_events) negative_events
+        #             FROM {self.name}
+        #             JOIN employee_events
+        #                 USING({self.name}_id)
+        #             WHERE {self.name}.{self.name}_id = {id}
+        #         """
+        query_string =  f"""
                     SELECT SUM(positive_events) positive_events
                          , SUM(negative_events) negative_events
                     FROM {self.name}
@@ -89,3 +97,6 @@ class Employee(QueryBase):
                         USING({self.name}_id)
                     WHERE {self.name}.{self.name}_id = {id}
                 """
+
+        results = super().pandas_query(query_string)
+        return results
