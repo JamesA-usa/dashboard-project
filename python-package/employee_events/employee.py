@@ -1,6 +1,6 @@
 # Import the QueryBase class
 #### YOUR CODE HERE
-from query_base import QueryBase
+from .query_base import QueryBase
 
 # Import dependencies needed for sql execution
 # from the `sql_execution` module
