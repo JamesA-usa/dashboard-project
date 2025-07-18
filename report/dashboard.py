@@ -165,29 +165,35 @@ class LineChart(MatplotlibViz):
 # Create a subclass of base_components/MatplotlibViz
 # called `BarChart`
 #### YOUR CODE HERE
+class BarChart(MatplotlibViz):
 
     # Create a `predictor` class attribute
     # assign the attribute to the output
     # of the `load_model` utils function
     #### YOUR CODE HERE
+    predictor = load_model()
 
     # Overwrite the parent class `visualization` method
     # Use the same parameters as the parent
     #### YOUR CODE HERE
+    def visualization(self, entity_id, model):
 
         # Using the model and asset_id arguments
         # pass the `asset_id` to the `.model_data` method
         # to receive the data that can be passed to the machine
         # learning model
         #### YOUR CODE HERE
+        data = model.model_data(entity_id)
         
         # Using the predictor class attribute
         # pass the data to the `predict_proba` method
         #### YOUR CODE HERE
+        pred_prob = self.predictor.predict_proba(data)
         
         # Index the second column of predict_proba output
         # The shape should be (<number of records>, 1)
         #### YOUR CODE HERE
+        data = data.assign(**{'Pred prob': pred_prob})
         
         
         # Below, create a `pred` variable set to
@@ -196,13 +202,18 @@ class LineChart(MatplotlibViz):
         # If the model's name attribute is "team"
         # We want to visualize the mean of the predict_proba output
         #### YOUR CODE HERE
+        if model.name == 'team':
+            pred = pred_prob.mean()
             
         # Otherwise set `pred` to the first value
         # of the predict_proba output
         #### YOUR CODE HERE
+        else:
+            pred = pred_prob[0]
         
         # Initialize a matplotlib subplot
         #### YOUR CODE HERE
+        fig, ax = plt.subplots()
         
         # Run the following code unchanged
         ax.barh([''], [pred])
@@ -213,6 +224,7 @@ class LineChart(MatplotlibViz):
         # to the `.set_axis_styling`
         # method
         #### YOUR CODE HERE
+        super().set_axis_styling(ax = ax, bordercolor='black', fontcolor='black')
  
 # Create a subclass of combined_components/CombinedComponent
 # called Visualizations       
