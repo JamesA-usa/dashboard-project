@@ -279,6 +279,7 @@ class DashboardFilters(FormGroup):
 # Create a subclass of CombinedComponents
 # called `Report`
 #### YOUR CODE HERE
+class Report(CombinedComponent):
 
     # Set the `children`
     # class attribute to a list
@@ -286,6 +287,7 @@ class DashboardFilters(FormGroup):
     # of the header, dashboard filters,
     # data visualizations, and notes table
     #### YOUR CODE HERE
+    children = [Header(), DashboardFilters(), Visualizations(), NotesTable()]
 
 # Initialize a fasthtml app 
 #### YOUR CODE HERE
