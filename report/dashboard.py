@@ -229,12 +229,14 @@ class BarChart(MatplotlibViz):
 # Create a subclass of combined_components/CombinedComponent
 # called Visualizations       
 #### YOUR CODE HERE
+class Visualizations(CombinedComponent):
 
     # Set the `children`
     # class attribute to a list
     # containing an initialized
     # instance of `LineChart` and `BarChart`
     #### YOUR CODE HERE
+    children = [LineChart(), BarChart()]
 
     # Leave this line unchanged
     outer_div_type = Div(cls='grid')
