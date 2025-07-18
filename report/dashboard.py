@@ -61,16 +61,21 @@ class ReportDropdown(Dropdown):
 # Create a subclass of base_components/BaseComponent
 # called `Header`
 #### YOUR CODE HERE
+class Header(BaseComponent):
 
     # Overwrite the `build_component` method
     # Ensure the method has the same parameters
     # as the parent class
     #### YOUR CODE HERE
+    def build_component(self, entity_id, model):
         
         # Using the model argument for this method
         # return a fasthtml H1 objects
         # containing the model's name attribute
         #### YOUR CODE HERE
+        return Div(
+            H1(model.name)
+        )
           
 
 # Create a subclass of base_components/MatplotlibViz
