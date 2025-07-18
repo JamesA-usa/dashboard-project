@@ -81,44 +81,64 @@ class Header(BaseComponent):
 # Create a subclass of base_components/MatplotlibViz
 # called `LineChart`
 #### YOUR CODE HERE
+class LineChart(MatplotlibViz):
     
     # Overwrite the parent class's `visualization`
     # method. Use the same parameters as the parent
     #### YOUR CODE HERE
+    def visualization(self, entity_id, model):
     
 
         # Pass the `asset_id` argument to
         # the model's `event_counts` method to
         # receive the x (Day) and y (event count)
         #### YOUR CODE HERE
+        results = QueryBase.event_counts(entity_id)
         
         # Use the pandas .fillna method to fill nulls with 0
         #### YOUR CODE HERE
+        results = results.fillna(0)
         
         # User the pandas .set_index method to set
         # the date column as the index
         #### YOUR CODE HERE
+        results = results.set_index('Day')
         
         # Sort the index
         #### YOUR CODE HERE
+        """ 
+        Ref: Sorting Pandas dataframe index
+        https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_index.html
+        """
+        results_sort = results.sort_index()
         
         # Use the .cumsum method to change the data
         # in the dataframe to cumulative counts
         #### YOUR CODE HERE
+        df_cumsum = results_sort.cumsum()
         
         
         # Set the dataframe columns to the list
         # ['Positive', 'Negative']
         #### YOUR CODE HERE
+        df_cumsum_rename = df_cumsum.rename(columns = {'positive_events': 'positive',
+                                            'negative_events': 'negative'})
         
         # Initialize a pandas subplot
         # and assign the figure and axis
         # to variables
         #### YOUR CODE HERE
+        fig, ax = plt.subplots()
         
         # call the .plot method for the
         # cumulative counts dataframe
         #### YOUR CODE HERE
+
+        """ 
+        Help on determining return type of dataframe.plot:
+        https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.html
+        """
+        ax = df_cumsum_rename.plot(x = 'Day', y = 'event_count', ax = ax)
         
         # pass the axis variable
         # to the `.set_axis_styling`
@@ -128,9 +148,18 @@ class Header(BaseComponent):
         # Reference the base_components/matplotlib_viz file 
         # to inspect the supported keyword arguments
         #### YOUR CODE HERE
+        super().set_axis_styling(ax = ax, bordercolor='black', fontcolor='black')
         
         # Set title and labels for x and y axis
         #### YOUR CODE HERE
+        ax.set_title('Cumulative daily employee events')
+
+        """ Syntax for setting x & y labels on matplotlib.axes.Axes object:
+        - x_label: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html
+        - y_label: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html """
+        
+        ax.set_xlabel('Date')
+        ax.set_ylabel('Employee events')
 
 
 # Create a subclass of base_components/MatplotlibViz
