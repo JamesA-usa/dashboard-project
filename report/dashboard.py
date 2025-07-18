@@ -244,15 +244,18 @@ class Visualizations(CombinedComponent):
 # Create a subclass of base_components/DataTable
 # called `NotesTable`
 #### YOUR CODE HERE
+class NotesTable(DataTable):
 
     # Overwrite the `component_data` method
     # using the same parameters as the parent class
     #### YOUR CODE HERE
+    def component_data(self, entity_id, model):
         
         # Using the model and entity_id arguments
         # pass the entity_id to the model's .notes 
         # method. Return the output
         #### YOUR CODE HERE
+        return model.notes(entity_id)
     
 
 class DashboardFilters(FormGroup):
