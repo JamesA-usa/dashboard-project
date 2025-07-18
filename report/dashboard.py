@@ -291,20 +291,25 @@ class Report(CombinedComponent):
 
 # Initialize a fasthtml app 
 #### YOUR CODE HERE
+app, route = fast_app()
 
 # Initialize the `Report` class
 #### YOUR CODE HERE
-
+report = Report()
 
 # Create a route for a get request
 # Set the route's path to the root
 #### YOUR CODE HERE
+@route('/')
+def get():
 
     # Call the initialized report
     # pass the integer 1 and an instance
     # of the Employee class as arguments
     # Return the result
     #### YOUR CODE HERE
+    result = report(1, Employee())
+    return result
 
 # Create a route for a get request
 # Set the route's path to receive a request
@@ -314,12 +319,16 @@ class Report(CombinedComponent):
 # parameterize the employee ID 
 # to a string datatype
 #### YOUR CODE HERE
+@route('/employee/{id}')
+def get(id:str):
 
     # Call the initialized report
     # pass the ID and an instance
     # of the Employee SQL class as arguments
     # Return the result
     #### YOUR CODE HERE
+    result = report(id, Employee())
+    return result
 
 # Create a route for a get request
 # Set the route's path to receive a request
@@ -329,13 +338,16 @@ class Report(CombinedComponent):
 # parameterize the team ID 
 # to a string datatype
 #### YOUR CODE HERE
+@route('/team/{id}')
+def get(id:str):
 
     # Call the initialized report
     # pass the id and an instance
     # of the Team SQL class as arguments
     # Return the result
     #### YOUR CODE HERE
-
+    result = report(id, Team())
+    return result
 
 # Keep the below code unchanged!
 @app.get('/update_dropdown{r}')
