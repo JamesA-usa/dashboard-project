@@ -50,6 +50,8 @@ class QueryBase(QueryMixin):
 
         query_string = f"""
             select 
+                event_date as Day,
+                positive_events + negative_events as event_count,
                 sum(positive_events) as positive_events, 
                 sum(negative_events) as negative_events
             from 
