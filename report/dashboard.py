@@ -189,7 +189,7 @@ class BarChart(MatplotlibViz):
         # Index the second column of predict_proba output
         # The shape should be (<number of records>, 1)
         #### YOUR CODE HERE
-        data = data.assign(**{'Pred prob': pred_prob})
+        data = data.assign(**{'Prob': pred_prob[:,1]})
         
         
         # Below, create a `pred` variable set to
@@ -199,13 +199,13 @@ class BarChart(MatplotlibViz):
         # We want to visualize the mean of the predict_proba output
         #### YOUR CODE HERE
         if model.name == 'team':
-            pred = pred_prob.mean()
+            pred = data.loc[:,'Prob'].mean()
             
         # Otherwise set `pred` to the first value
         # of the predict_proba output
         #### YOUR CODE HERE
         else:
-            pred = pred_prob[0]
+            pred = data.loc[:,'Prob'][0]
         
         # Initialize a matplotlib subplot
         #### YOUR CODE HERE
