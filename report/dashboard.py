@@ -133,7 +133,7 @@ class LineChart(MatplotlibViz):
         # call the .plot method for the
         # cumulative counts dataframe
         #### YOUR CODE HERE
-        ax = df_cumsum_rename.plot(y = 'event_count', kind='line')
+        ax = df_cumsum_rename.plot(kind='line')
         
         # pass the axis variable
         # to the `.set_axis_styling`
