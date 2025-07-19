@@ -128,13 +128,12 @@ class LineChart(MatplotlibViz):
         # and assign the figure and axis
         # to variables
         #### YOUR CODE HERE
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize = (12, 8))
         
         # call the .plot method for the
         # cumulative counts dataframe
         #### YOUR CODE HERE
-        ax.plot(df_cumsum_rename.index,
-                df_cumsum_rename.loc[:,'event_count'])
+        ax = df_cumsum_rename.plot(y = 'event_count', kind='line')
         
         # pass the axis variable
         # to the `.set_axis_styling`
@@ -148,14 +147,14 @@ class LineChart(MatplotlibViz):
         
         # Set title and labels for x and y axis
         #### YOUR CODE HERE
-        ax.set_title('Cumulative daily employee events')
+        ax.set_title(f'Cumulative {model.name} occurrences for {entity_id}')
 
         """ Syntax for setting x & y labels on matplotlib.axes.Axes object:
         - x_label: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html
         - y_label: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html """
         
-        ax.set_xlabel('Date')
-        ax.set_ylabel('Employee events')
+        ax.set_xlabel('Day')
+        ax.set_ylabel('No. Events')
 
 
 # Create a subclass of base_components/MatplotlibViz
@@ -209,7 +208,7 @@ class BarChart(MatplotlibViz):
         
         # Initialize a matplotlib subplot
         #### YOUR CODE HERE
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize = (12, 8))
         
         # Run the following code unchanged
         ax.barh([''], [pred])
