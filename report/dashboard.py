@@ -93,7 +93,7 @@ class LineChart(MatplotlibViz):
         # the model's `event_counts` method to
         # receive the x (Day) and y (event count)
         #### YOUR CODE HERE
-        results = QueryBase.event_counts(entity_id)
+        results = model.event_counts(entity_id)
         
         # Use the pandas .fillna method to fill nulls with 0
         #### YOUR CODE HERE
