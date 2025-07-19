@@ -38,7 +38,8 @@ class Employee(QueryBase):
         #### YOUR CODE HERE
         query_string = f"""
             select 
-                first_name, last_name, {self.name}_id
+                concat(first_name, " ",last_name) as full_name, 
+                {self.name}_id
             from
                 {self.name}
             """
@@ -63,7 +64,7 @@ class Employee(QueryBase):
         #### YOUR CODE HERE
         query_string = f""" 
             select
-                first_name, last_name
+                concat(first_name, " ",last_name) as full_name
             from
                 {self.name}
             where
