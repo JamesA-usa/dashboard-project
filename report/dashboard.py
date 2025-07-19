@@ -147,7 +147,7 @@ class LineChart(MatplotlibViz):
         
         # Set title and labels for x and y axis
         #### YOUR CODE HERE
-        ax.set_title(f'Cumulative {model.name} occurrences for {entity_id}')
+        ax.set_title(f'Cumulative event frequency for {model.name} {entity_id}')
 
         """ Syntax for setting x & y labels on matplotlib.axes.Axes object:
         - x_label: https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html
