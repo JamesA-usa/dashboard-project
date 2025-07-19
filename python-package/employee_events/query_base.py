@@ -82,7 +82,9 @@ class QueryBase(QueryMixin):
         # YOUR CODE HERE
         query_string = f"""
             select 
-                {self.name}_id, note_date, note
+                {self.name}_id as `{self.name} ID`,
+                note_date as `Note date`, 
+                note as `Description`
             from
                 notes
             where
