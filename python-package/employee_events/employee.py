@@ -1,65 +1,46 @@
-# Import the QueryBase class
-#### YOUR CODE HERE
+from query_base import QueryBase
+from sql_execution import execute, execute_df
+from typing import List, Tuple
+from pandas import DataFrame
 
-# Import dependencies needed for sql execution
-# from the `sql_execution` module
-#### YOUR CODE HERE
+class Employee(QueryBase):
+    """Queries for the `employee` table."""
+    name = "employee"
 
-# Define a subclass of QueryBase
-# called Employee
-#### YOUR CODE HERE
+    @property
+    def id_field(self) -> str:
+        return f"{self.name}_id"
 
-    # Set the class attribute `name`
-    # to the string "employee"
-    #### YOUR CODE HERE
+    def names(self) -> List[Tuple[str, int]]:
+        """Return [(full_name, employee_id), ...] for all employees."""
+        sql = f"""
+            SELECT
+                first_name || ' ' || last_name AS full_name,
+                {self.id_field} AS id
+            FROM {self.name}
+        """
+        return execute(sql)
 
+    def username(self, id: int) -> List[Tuple[str]]:
+        """Return [(full_name,)] for the employee with the given id."""
+        id = int(id)  # keep f-string usage; ensure numeric
+        sql = f"""
+            SELECT
+                first_name || ' ' || last_name AS full_name
+            FROM {self.name}
+            WHERE {self.name}.{self.id_field} = {id}
+        """
+        return execute(sql)
 
-    # Define a method called `names`
-    # that receives no arguments
-    # This method should return a list of tuples
-    # from an sql execution
-    #### YOUR CODE HERE
-        
-        # Query 3
-        # Write an SQL query
-        # that selects two columns 
-        # 1. The employee's full name
-        # 2. The employee's id
-        # This query should return the data
-        # for all employees in the database
-        #### YOUR CODE HERE
-    
-
-    # Define a method called `username`
-    # that receives an `id` argument
-    # This method should return a list of tuples
-    # from an sql execution
-    #### YOUR CODE HERE
-        
-        # Query 4
-        # Write an SQL query
-        # that selects an employees full name
-        # Use f-string formatting and a WHERE filter
-        # to only return the full name of the employee
-        # with an id equal to the id argument
-        #### YOUR CODE HERE
-
-
-    # Below is method with an SQL query
-    # This SQL query generates the data needed for
-    # the machine learning model.
-    # Without editing the query, alter this method
-    # so when it is called, a pandas dataframe
-    # is returns containing the execution of
-    # the sql query
-    #### YOUR CODE HERE
-    def model_data(self, id):
-
-        return f"""
-                    SELECT SUM(positive_events) positive_events
-                         , SUM(negative_events) negative_events
-                    FROM {self.name}
-                    JOIN employee_events
-                        USING({self.name}_id)
-                    WHERE {self.name}.{self.name}_id = {id}
-                """
+    def model_data(self, id: int) -> DataFrame:
+        """Return a DataFrame with summed positive/negative events for an employee."""
+        id = int(id)
+        sql = f"""
+            SELECT
+                SUM(positive_events) AS positive_events,
+                SUM(negative_events) AS negative_events
+            FROM {self.name}
+            JOIN employee_events USING({self.id_field})
+            WHERE {self.name}.{self.id_field} = {id}
+        """
+        return execute_df(sql)
