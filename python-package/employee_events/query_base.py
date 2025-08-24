@@ -37,7 +37,7 @@ class QueryBase(QueryMixin):
                     SUM(positive_events) AS positive_events,
                     SUM(negative_events) AS negative_events
             FROM {self.name}
-            JOIN employee_events USING({self.name}_id)
+            INNER JOIN employee_events USING({self.name}_id)
             WHERE {self.name}.{self.name}_id = {id}
             GROUP BY event_date
             ORDER BY event_date            
@@ -47,8 +47,7 @@ class QueryBase(QueryMixin):
 
     # Define a `notes` method that receives an id argument
     # This function should return a pandas dataframe
-    # YOUR CODE HERE
-
+    def notes(self, id):
         # QUERY 2
         # Write an SQL query that returns `note_date`, and `note`
         # from the `notes` table
@@ -56,5 +55,11 @@ class QueryBase(QueryMixin):
         # with f-string formatting
         # so the query returns the notes
         # for the table name in the `name` class attribute
-        # YOUR CODE HERE
-
+        query_string = f"""
+            SELECT
+                note_date
+                , note
+            FROM notes
+            INNER JOIN {self.name} USING({self.name}_id)
+            WHERE {self.name}.{self.name}_id = {id}
+            """
