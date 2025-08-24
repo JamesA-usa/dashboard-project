@@ -30,7 +30,7 @@ class Employee(QueryBase):
             SELECT
                 CONCAT(first_name, ' ', last_name) AS employee_name
                 , employee_id
-            FROM {name}
+            FROM {self.name}
         """
         return self.query(query_string)
     
@@ -50,7 +50,7 @@ class Employee(QueryBase):
         query_string = f"""
             SELECT 
                 CONCAT(first_name, ' ', last_name) AS employee_name
-            FROM {name} 
+            FROM {self.name} 
             WHERE employee_id == {id}
         """
         return self.query(query_string)
