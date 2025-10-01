@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 # Import QueryBase, Employee, Team from employee_events
 #### YOUR CODE HERE
+import QueryBase, Employee, Team from employee_events
 
 # import the load_model function from the utils.py file
 #### YOUR CODE HERE
