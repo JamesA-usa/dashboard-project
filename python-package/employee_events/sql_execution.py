@@ -21,10 +21,10 @@ class QueryMixin:
 
     @staticmethod
     def pandas_query(sql_query):
-        """
-        Method that receives an SQL query as a string
-        and returns the query's result as a panda df.
-        """
+        # """
+        # Method that receives an SQL query as a string
+        # and returns the query's result as a panda df.
+        # """
         connection = connect(db_path)
         try:
             result = pd.read_sql_query(sql_query, connection)
@@ -41,10 +41,10 @@ class QueryMixin:
 
     @staticmethod
     def query(sql_query):
-        """
-        Returns SQL query as a string
-        and returns the query's result as a list of tuples.
-        """
+        #"""
+        # Returns SQL query as a string
+        # and returns the query's result as a list of tuples.
+        # """
         connection = connect(db_path)
         try:
             cursor = connection.cursor()
