@@ -27,11 +27,14 @@ from combined_components import FormGroup, CombinedComponent
 # Create a subclass of base_components/dropdown
 # called `ReportDropdown`
 #### YOUR CODE HERE
+from base_components.dropdown import Dropdown    
     
     # Overwrite the build_component method
     # ensuring it has the same parameters
     # as the Report parent class's method
     #### YOUR CODE HERE
+    class ReportDropdown(Dropdown):
+        pass
         #  Set the `label` attribute so it is set
         #  to the `name` attribute for the model
         #### YOUR CODE HERE
